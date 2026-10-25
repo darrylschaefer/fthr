@@ -6,8 +6,6 @@ import DocumentMenu from '@components/Menu/DocumentMenu';
 import AIMenu from '@components/Menu/AIMenu/AIMenu';
 import AssistantTabs from '@components/Menu/AIMenu/Header';
 import EditorAgentsToggle from '@components/Menu/DocumentMenu/EditorAgentsToggle';
-import VersionSwitcher from '@components/Document/EditorComponents/VersionSwitcher';
-import { DocumentVersion } from '@type/document';
 import { WorkspaceAssistantContext, WorkspaceToolbarContext } from './WorkspaceContext';
 import { WorkspaceDocumentMenuProvider } from './WorkspaceDocumentMenu';
 import WorkspaceSearch from '@components/Search/WorkspaceSearch';
@@ -172,12 +170,6 @@ const Workspace = () => {
     }
   };
 
-  const changeVersion = async (version: DocumentVersion) => {
-    // Even the currently selected button can supersede a pending switch.
-    // The keyed document editor loads the winning section without a refresh.
-    if (currentDoc) await setDocumentVersion(currentDoc.id, version);
-  };
-
   const navigateSearch = (destination: SettingsDestination) => {
     if (compact) setMobilePane(null);
     if (destination !== 'pages' && destination !== 'export') {
@@ -283,7 +275,6 @@ const Workspace = () => {
             <div className="workspace-document-title" title={currentDoc?.title || 'Untitled document'}>
               <span>{currentDoc?.title || 'Untitled document'}</span>
             </div>
-            {currentDoc && <VersionSwitcher currentVersion={currentDoc.currentVersion || 'Draft'} onVersionChange={changeVersion} />}
             <WorkspaceSearch navigate={navigateSearch} />
             <div className="workspace-layout-controls" role="group" aria-label="Workspace layout">
               <button id="toggle-left-pane" type="button" className="workspace-icon-button" aria-expanded={!hideLeft}

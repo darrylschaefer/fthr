@@ -73,14 +73,13 @@ function button(label: string) {
   return target;
 }
 async function click(label: string) {
-  if (['Chat', 'Notes', 'History', 'Tools', 'Meta', 'Macros'].includes(label)) {
+  if (['Chat', 'Notes', 'Versions', 'History', 'Tools', 'Meta', 'Macros'].includes(label)) {
     const heading = compact ? '#workspace-assistant .workspace-mobile-pane-heading' : '.workspace-commandbar';
     const trigger = document.querySelector<HTMLButtonElement>(`${heading} [aria-label^="Assistant section:"]`)!;
     if (trigger.getAttribute('aria-expanded') !== 'true') await act(async () => { trigger.click(); await tick(); });
   }
   if (label === 'v1 Version' || label === 'v2 Version') {
-    const chooser = document.querySelector<HTMLButtonElement>('[aria-label="Choose document version"]')!;
-    if (chooser.getAttribute('aria-expanded') !== 'true') await click('Choose document version');
+    await click('Versions');
   }
   await act(async () => { const target = button(label); target.focus(); target.click(); await tick(); });
 }
@@ -169,7 +168,7 @@ describe('History in the right sidebar', () => {
   });
 
   it('resets previews when switching sections/documents and survives pane close/reopen', async () => {
-    await mount(); await click('History'); await click('Preview'); await click('v2 Version');
+    await mount(); await click('History'); await click('Preview'); await click('v2 Version'); await click('History');
     expect(history().querySelector('pre')).toBeNull(); await click('Preview');
     expect(history().querySelector('pre')?.textContent).toBe('Alpha earlier finished.');
     expect(main().textContent).toBe('Alpha finished today.');

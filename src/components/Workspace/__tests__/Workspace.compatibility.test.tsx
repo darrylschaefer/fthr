@@ -21,7 +21,11 @@ vi.mock('react-i18next', () => ({ useTranslation: () => ({ t: (key: string) => k
 vi.mock('@components/Menu/DocumentMenu', async () => ({
   default: (await import('@components/FooterMenu/ThemeToggle')).default,
 }));
-vi.mock('@components/Menu/AIMenu/AIMenu', () => ({ default: () => <p>Synthetic assistant content</p> }));
+vi.mock('@components/Menu/AIMenu/AIMenu', async original => {
+  const { default: AIMenu } = await original<typeof import('@components/Menu/AIMenu/AIMenu')>();
+  return { default: (props: Parameters<typeof AIMenu>[0]) => props.activeMenu === 'versions'
+    ? <AIMenu {...props} /> : <p>Synthetic assistant content</p> };
+});
 
 const initialState = useStore.getState();
 const tick = () => new Promise(resolve => setTimeout(resolve, 0));
@@ -66,6 +70,18 @@ function element<T extends HTMLElement = HTMLElement>(selector: string): T {
 function expectDocument(text = 'Saved draft text.') {
   expect(element('[aria-label="Document content"]').textContent).toBe(text);
   expect(container.querySelector('.workspace-editor-tools [role="toolbar"]')).not.toBeNull();
+}
+
+async function openVersions() {
+  await act(async () => {
+    if (element('#workspace-assistant').hidden) element<HTMLButtonElement>('#toggle-right-pane').click();
+    await tick();
+    element<HTMLButtonElement>('.workspace-commandbar [aria-label^="Assistant section:"]').click(); await tick();
+  });
+  await act(async () => {
+    [...container.querySelectorAll<HTMLButtonElement>('.workspace-commandbar [role="menuitemradio"]')]
+      .find(button => button.textContent === 'Versions')!.click(); await tick();
+  });
 }
 
 beforeEach(async () => {
@@ -173,6 +189,7 @@ describe('saved workspace compatibility', () => {
     const { currentVersion, draftEditorState, finishedEditorState, snippets, ...legacy } = fixture();
     await load({ chats: [legacy as DocumentInterface], currentChatIndex: 0 }); await mount();
     expectDocument();
+    await openVersions();
     expect(element('[aria-label="v1 Version"]').getAttribute('aria-pressed')).toBe('true');
     const restored = useStore.getState().chats![0];
     expect(restored.draftEditorState).toBe(legacy.editorState);
@@ -197,6 +214,7 @@ describe('saved workspace compatibility', () => {
     expectDocument();
     expect(element('.workspace-document-title').textContent).toBe('Untitled document');
     expect(document.title).toBe('fthr — A place for your words');
+    await openVersions();
     expect(element('[aria-label="v1 Version"]').getAttribute('aria-pressed')).toBe('true');
   });
 

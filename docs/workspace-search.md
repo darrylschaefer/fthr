@@ -2,7 +2,7 @@
 
 The title bar's Search control and Ctrl/Cmd+K open a centered command palette. This is the workspace's single search entry point; the library has no separate search control or local filter. The editor stays mounted behind it. On phones, the same control uses a search icon and the palette fits the screen with its results scrolling independently.
 
-The mobile header keeps the fthr icon, document title, version chooser, Search, and pane controls on one row. The wordmark is hidden, and long document and version names truncate within their own space so they cannot overlap the controls.
+The mobile header keeps the fthr icon, document title, Search, and pane controls on one row. The wordmark is hidden, and long document titles truncate so they cannot overlap the controls. Versions lives in the right-pane section dropdown alongside Notes and History; Search → Document versions opens the same panel.
 
 ## Find and open
 
@@ -37,7 +37,7 @@ Search is a local lexical search. AI tool semantic/hybrid search remains separat
 
 Automated coverage uses synthetic documents and no paid APIs. It covers version/note/metadata content, phrase scopes, accents, typo ranking, corrupt serialized states and recent history, model deduplication, large text, live editor changes, save errors, cancellation, keyboard/focus handling, mobile Notes navigation, the actual page/export controls, and explicit model-default changes. The full application suite also checks existing version, pane, selection, toolbar, and export behavior.
 
-`npm run check` passed both TypeScript checks, 371 tests in 22 files, and the production build. Browser checks cover the desktop palette, separate page setup and export submenus, the embedded two-page PDF preview, Settings category navigation, and mobile header widths of 320px, 375px, and 767px with no horizontal overflow. The mobile title bar stays on one 52px row, and its version and Search controls open their menus. The old settings button and page/export toolbar buttons are absent from the rendered document.
+The initial search implementation passed `npm run check` with 371 tests in 22 files and the production build. Browser checks covered the desktop palette, separate page setup and export submenus, the embedded two-page PDF preview, Settings category navigation, and mobile header widths of 320px, 375px, and 767px with no horizontal overflow. The current mobile title bar stays on one 52px row, with version management in the right pane. The old settings button and page/export toolbar buttons are absent from the rendered document.
 
 Screenshots: [desktop settings](screenshots/workspace-search-desktop.png), [phone settings](screenshots/workspace-search-phone.png), [mobile header](screenshots/workspace-mobile-header.png), [page setup](screenshots/workspace-page-setup.png), [phone page setup](screenshots/workspace-page-setup-phone.png), and [export submenu](screenshots/workspace-export-menu.png).
 

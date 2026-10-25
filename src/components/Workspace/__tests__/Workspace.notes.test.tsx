@@ -71,14 +71,13 @@ function button(label: string) {
   return target;
 }
 async function click(label: string) {
-  if (['Chat', 'Notes', 'History', 'Tools', 'Meta', 'Macros'].includes(label)) {
+  if (['Chat', 'Notes', 'Versions', 'History', 'Tools', 'Meta', 'Macros'].includes(label)) {
     const heading = compact ? '#workspace-assistant .workspace-mobile-pane-heading' : '.workspace-commandbar';
     const trigger = document.querySelector<HTMLButtonElement>(`${heading} [aria-label^="Assistant section:"]`)!;
     if (trigger.getAttribute('aria-expanded') !== 'true') await act(async () => { trigger.click(); await tick(); });
   }
   if (label === 'v1 Version' || label === 'v2 Version') {
-    const chooser = document.querySelector<HTMLButtonElement>('[aria-label="Choose document version"]')!;
-    if (chooser.getAttribute('aria-expanded') !== 'true') await click('Choose document version');
+    await click('Versions');
   }
   await act(async () => { const target = button(label); target.focus(); target.click(); await tick(); });
 }
@@ -135,7 +134,7 @@ describe('document Notes sidebar', () => {
     });
     expect(await snippetReadTool({ parent_doc_id: 'Alpha', snippet_id: created.id })).toMatchObject({ content: 'A useful new idea.' });
     expect(main().textContent).toBe('Alpha draft text.');
-    await click('v2 Version'); expect(main().textContent).toBe('Alpha finished text.');
+    await click('v2 Version'); await click('Notes'); expect(main().textContent).toBe('Alpha finished text.');
     expect(notes().textContent).toContain('A useful new idea.');
     await click('Chat'); await click('Notes'); await click('Close assistant pane'); await click('Show assistant pane');
     expect(notes().textContent).toContain('A useful new idea.');

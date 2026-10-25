@@ -55,7 +55,7 @@ function button(name: string) {
 }
 async function settle() { await act(async () => { await tick(); await tick(); }); }
 async function click(name: string) {
-  if (['Chat', 'Notes', 'History', 'Tools', 'Meta', 'Macros'].includes(name)) {
+  if (['Chat', 'Notes', 'Versions', 'History', 'Tools', 'Meta', 'Macros'].includes(name)) {
     const trigger = container.querySelector<HTMLButtonElement>('.workspace-commandbar [aria-label^="Assistant section:"]')!;
     if (trigger.getAttribute('aria-expanded') !== 'true') await act(async () => { trigger.click(); await tick(); });
   }
@@ -146,7 +146,7 @@ describe('Tools and Prose Rhythm in the writing workspace', () => {
     await mount(); await openRhythm(); await click('Chat'); expect(ownHighlights()).toEqual([]);
     await openRhythm(); await click('Close assistant pane'); expect(ownHighlights()).toEqual([]);
     await click('Show assistant pane'); expect(rows()).toHaveLength(3);
-    await click('Choose document version'); await click('v2'); expect(rows()).toHaveLength(2);
+    await click('Versions'); await click('v2'); await click('Tools'); expect(rows()).toHaveLength(2);
     expect([...registry.values()].flatMap(highlight => [...highlight]).map(range => range.toString()))
       .toEqual(['A different version.', 'Another sentence here.']);
     await act(async () => { useStore.getState().setCurrentChatIndex(1); await tick(); }); await settle();
