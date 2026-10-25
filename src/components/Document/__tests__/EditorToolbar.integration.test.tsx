@@ -108,10 +108,6 @@ async function click(label: string) {
     if (document.querySelector('[data-menu-back]')) await click('Back to search');
     if (!document.querySelector('[role="combobox"]')) await click('Search workspace');
   }
-  if (label === 'v1 Version' || label === 'v2 Version') {
-    const chooser = document.querySelector<HTMLButtonElement>('[aria-label="Choose document version"]')!;
-    if (chooser.getAttribute('aria-expanded') !== 'true') await click('Choose document version');
-  }
   await act(async () => {
     const button = control(label);
     const down = new MouseEvent('mousedown', { bubbles: true, cancelable: true, button: 0 });

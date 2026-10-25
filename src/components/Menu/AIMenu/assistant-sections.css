@@ -16,6 +16,16 @@
 .assistant-section .workspace-note { padding: 0 0 20px; margin-bottom: 20px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; box-shadow: none; }
 .assistant-section .workspace-note-title, .assistant-section .workspace-checkpoint h3, .assistant-section .workspace-history-preview h3 { font-size: 14px; font-weight: 500; }
 .assistant-section .workspace-note .editor-input, .assistant-section .workspace-note-placeholder { font-size: 14px; line-height: 1.65; }
+.workspace-version-list { display: flex; flex-direction: column; }
+.workspace-version-list button { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 40px; padding: 10px 0; border-bottom: 1px solid var(--line); color: var(--muted); background: transparent; font-size: 14px; line-height: 1.55; text-align: left; }
+.workspace-version-list button:last-child { border-bottom: 0; }
+.workspace-version-list button:hover:not(:disabled), .workspace-version-list button[aria-pressed="true"] { color: var(--ink); }
+.workspace-version-list button[aria-pressed="true"] { font-weight: 500; }
+.workspace-version-list button:disabled { opacity: .4; cursor: default; }
+.workspace-version-list svg { flex: none; color: var(--accent); }
+.assistant-section .workspace-version-actions { align-items: flex-start; gap: 8px; margin-top: 20px; }
+.workspace-version-actions svg { flex: none; color: var(--muted); }
+.workspace-versions-content [role="alert"] { padding-top: 16px; font-size: 12px; }
 .assistant-section .workspace-checkpoint-excerpt { font-size: 13px; }
 .assistant-section .tools-tool { margin: 0 0 20px; border: 0; border-radius: 0; }
 .assistant-section .tools-tool-title { gap: 10px; padding: 0 0 16px; }
@@ -62,6 +72,6 @@
   .assistant-section .assistant-section-input { font-size: 16px; }
 }
 @media (pointer: coarse) {
-  .assistant-section .assistant-section-action, .assistant-macro .assistant-macro-name, .assistant-macro-actions > button, .assistant-macro-actions > div { min-height: 44px; }
+  .assistant-section .assistant-section-action, .assistant-macro .assistant-macro-name, .assistant-macro-actions > button, .assistant-macro-actions > div, .workspace-version-list button { min-height: 44px; }
   .assistant-macro-actions > button, .assistant-macro-actions > div { min-width: 36px; }
 }

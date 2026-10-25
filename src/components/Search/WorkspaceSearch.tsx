@@ -71,7 +71,7 @@ function SearchPalette({ close, select, trigger, destination, clearDestination }
   const entries = useMemo(() => [
     ...documentSearchEntries(documents, folders).map(entry => live && entry.documentId === live.documentId && entry.versionId === live.versionId ? { ...entry, text: live.text } : entry),
     ...conversationSearchEntries(conversations),
-    ...SEARCH_SETTINGS.filter(entry => (currentDoc || !['pages', 'export', 'notes', 'history', 'meta'].includes(entry.destination!)) &&
+    ...SEARCH_SETTINGS.filter(entry => (currentDoc || !['pages', 'export', 'notes', 'versions', 'history', 'meta'].includes(entry.destination!)) &&
       (entry.destination !== 'sync' || googleClientId)),
     ...connectionSearchEntries(connections),
     ...agents.map(agent => ({ id: `agent:${agent.id}`, category: 'settings' as const, title: agent.name,
@@ -256,7 +256,7 @@ export default function WorkspaceSearch({ navigate }: { navigate: (destination: 
     if (entry.destination === 'pages' || entry.destination === 'export') {
       menu.setView(entry.destination); return true;
     }
-    if (entry.model || !['notes', 'history', 'tools', 'meta', 'macros'].includes(entry.destination!)) setDestination(entry);
+    if (entry.model || !['notes', 'versions', 'history', 'tools', 'meta', 'macros'].includes(entry.destination!)) setDestination(entry);
     else if (entry.destination) { setOpen(false); navigate(entry.destination); }
     return true;
   };

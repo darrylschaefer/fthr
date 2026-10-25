@@ -38,7 +38,7 @@ Open **Search** or press **Ctrl/Cmd+K** to search directly or browse **Settings*
 | Instant macros and selection sending | Run saved prompts against a selected passage, with individual model settings for each macro. |
 | Saved agent profiles | Name writing assistants, save their instructions, model settings, tools, and approval preferences, and choose a default. Start fresh chats from any profile. |
 | Context-aware prompts | Include selected text, named notes, and document metadata in your prompts, using references that pull in the relevant content. |
-| Writing versions and notes | Create, copy, rename, and switch between writing versions within a document, with shared notes in the right sidebar. Organize documents into folders. |
+| Writing versions and notes | Create, copy, rename, and switch writing versions from the right-pane Versions section or Search. Keep shared notes beside your writing and organize documents into folders. |
 | Workspace search | Open Search or press Ctrl/Cmd+K to find document text, writing versions, notes, chat titles and messages, profiles, settings, and models in one command palette. Search runs locally. |
 | Custom document metadata | Keep tags, descriptions, and custom fields with a document, and reference those fields in AI prompts. |
 | Semantic and hybrid search | Search by keyword, by meaning through embeddings, or combine both approaches to retrieve relevant passages. Embedding search requires configuration. |

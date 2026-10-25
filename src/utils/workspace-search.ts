@@ -5,7 +5,7 @@ import type { ChatConversation } from '@store/chat-slice';
 
 export type SearchCategory = 'documents' | 'chats' | 'settings' | 'models';
 export type SearchFilter = 'all' | SearchCategory;
-export type SettingsDestination = 'api' | 'agents' | 'embeddings' | 'appearance' | 'backup' | 'pages' | 'export' | 'history' | 'notes' | 'tools' | 'meta' | 'macros' | 'about' | 'macro-library' | 'usage' | 'sync' | 'clear-documents';
+export type SettingsDestination = 'api' | 'agents' | 'embeddings' | 'appearance' | 'backup' | 'pages' | 'export' | 'versions' | 'history' | 'notes' | 'tools' | 'meta' | 'macros' | 'about' | 'macro-library' | 'usage' | 'sync' | 'clear-documents';
 export type SearchEntry = {
   id: string; category: SearchCategory; title: string; subtitle: string; keywords: string; text: string;
   documentId?: string; versionId?: string; noteId?: string; destination?: SettingsDestination;
@@ -27,6 +27,7 @@ export const SEARCH_SETTINGS: SearchEntry[] = [
   ['about', 'About fthr', 'App information, privacy, and project links', 'more information help credits github'],
   ['clear-documents', 'Delete all documents', 'Remove documents and folders from this workspace', 'clear conversations history reset delete all documents data'],
   ['notes', 'Notes', 'Open notes for the current document', 'snippets clips ideas'],
+  ['versions', 'Document versions', 'Switch, copy, create, or rename writing versions', 'draft alternative blank copies version name'],
   ['history', 'Document history', 'Review checkpoints and previous edits', 'revisions restore undo snapshots'],
   ['tools', 'Writing tools', 'Explore prose rhythm and writing tools', 'sentences length analysis'],
   ['meta', 'Document metadata', 'Edit the current document’s description, tags, and metadata', 'title properties fields'],

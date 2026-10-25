@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState, type Dispatch, type SetStateAction } from 'react';
-import { Add, Chat, Checkmark, ChevronDown, Document, MagicWand, Notebook, Time, Tools } from '@carbon/icons-react';
+import { Add, Chat, Checkmark, ChevronDown, Copy, Document, MagicWand, Notebook, Time, Tools } from '@carbon/icons-react';
 import useStore from '@store/store';
 import ModelLogo from '@components/Common/ModelLogo';
 import useAnchoredMenu from '@hooks/useAnchoredMenu';
@@ -9,6 +9,7 @@ import '../DocumentMenu/conversation-identity.css';
 const ConversationModelSettings = lazy(() => import('../DocumentMenu/ConversationModelSettings'));
 const sections = [
   { value: 'chat', name: 'Chat', icon: Chat }, { value: 'notes', name: 'Notes', icon: Notebook },
+  { value: 'versions', name: 'Versions', icon: Copy },
   { value: 'history', name: 'History', icon: Time }, { value: 'tools', name: 'Tools', icon: Tools },
   { value: 'meta', name: 'Meta', icon: Document }, { value: 'actions', name: 'Macros', icon: MagicWand },
 ];
